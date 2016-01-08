@@ -11,7 +11,8 @@ import java.util.UUID;
 public class ChronoEvent implements Comparable, Serializable {
 
     private String uuid;
-    private GregorianCalendar date;
+    private GregorianCalendar initialDate;
+    private GregorianCalendar finalDate;
     private Integer yearPoint;
     private String name;
     //    Image image;
@@ -40,12 +41,20 @@ public class ChronoEvent implements Comparable, Serializable {
         if (o == null) throw new NullPointerException("the field must not be null");
     }
 
-    public void setDate(int year, int month, int day) {
-        date.set(year, month, day);
+    public void setInitialDate(int year, int month, int day) {
+        initialDate.set(year, month, day);
     }
 
-    public GregorianCalendar getDate() {
-        return date;
+    public GregorianCalendar getInitialDate() {
+        return initialDate;
+    }
+
+    public GregorianCalendar getFinalDate() {
+        return finalDate;
+    }
+
+    public void setFinalDate(int year, int month, int day) {
+        initialDate.set(year, month, day);
     }
 
     public int getYear() {
@@ -95,7 +104,7 @@ public class ChronoEvent implements Comparable, Serializable {
     @Override
     public int compareTo(Object e) {
         ChronoEvent event = (ChronoEvent) e;
-        return this.date.compareTo(event.date);
+        return this.initialDate.compareTo(event.initialDate);
     }
 
     public String getUuid() {

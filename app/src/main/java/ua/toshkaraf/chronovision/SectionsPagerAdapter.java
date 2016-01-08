@@ -9,14 +9,16 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
+
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
+        // Return a PlaceholderFragment
         return PlaceholderFragment.newInstance(position + 1);
     }
 
