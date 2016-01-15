@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary_Warm">#3F51B5</color>
+    <color name="colorPrimaryDark_Warm">#303F9F</color>
+    <color name="colorAccent_Warm">#FF4081</color>
+    <color name="colorBackground_Warm">@android:color/background_dark</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="colorPrimary_Cold">#3F51B5</color>
+    <color name="colorPrimaryDark_Cold">#303F9F</color>
+    <color name="colorAccent_Cold">#FF4081</color>
+
+    <color name="colorBackground_Dark">@android:color/background_dark</color>
+    <color name="holo_light_primary">#cddc39</color>
+    <color name="primary_warm">#cddc39</color>
+    <color name="primary_dark_warm">#afb42b</color>
+    <color name="background_warm">#f0f4c3</color>
+    <color name="foreground_material_light">#000001</color>
+    <color name="black">#000000</color>
+    <color name="accent_warm">#aeea00</color>
+
+
 </resources>

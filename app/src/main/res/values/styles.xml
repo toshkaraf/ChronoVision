@@ -1,17 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@color/colorBackground_Dark</item>
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">
         <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
         <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
         <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
     </style>
@@ -20,7 +16,7 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -28,5 +24,29 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="AppTheme.Warm" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary_warm</item>
+        <item name="colorPrimaryDark">@color/primary_dark_warm</item>
+        <item name="android:colorBackground">@color/background_warm</item>
+        <item name="android:colorForeground">@color/primary_dark_warm</item>
+        <item name="colorAccent">@color/accent_warm</item>
+        <item name="android:windowBackground">@color/background_warm</item>
+
+    </style>
+
+    <style name="FullscreenTheme_Warm" parent="AppTheme.Warm">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="AppTheme.Warm.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 
 </resources>

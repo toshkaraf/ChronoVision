@@ -6,4 +6,16 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="AppTheme.Warm" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary_warm</item>
+        <item name="colorPrimaryDark">@color/primary_dark_warm</item>
+        <item name="android:colorBackground">@color/background_warm</item>
+        <item name="android:colorForeground">@color/primary_dark_warm</item>
+        <item name="android:navigationBarColor">@color/primary_dark_warm</item>
+        <item name="colorAccent">@color/accent_warm</item>
+        <item name="android:windowBackground">@color/background_warm</item>
+    </style>
+
+
 </resources>
