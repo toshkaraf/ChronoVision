@@ -10,4 +10,17 @@
 
     <string name="general_features">General features</string>
     <string name="multimedia">Multimedia data</string>
+    <string name="title_activity_main_settings">MainSettings</string>
+
+    <!-- Strings related to Settings -->
+
+    <string-array name="themes_list">
+        <item>Warm</item>
+        <item>Cold</item>
+        <item>Dark</item>
+
+    </string-array>
+
+    <string name="app_themes">App theme</string>
+
 </resources>

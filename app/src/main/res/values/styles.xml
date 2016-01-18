@@ -10,6 +10,7 @@
         <item name="android:windowActionBarOverlay">true</item>
         <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+        <item name="android:windowBackground">@color/colorBackground_Dark</item>
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
@@ -26,7 +27,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    <style name="AppTheme.Warm" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme_Warm" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/primary_warm</item>
         <item name="colorPrimaryDark">@color/primary_dark_warm</item>
         <item name="android:colorBackground">@color/background_warm</item>
@@ -36,16 +37,30 @@
 
     </style>
 
-    <style name="FullscreenTheme_Warm" parent="AppTheme.Warm">
-        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+    <style name="FullscreenTheme_Warm" parent="AppTheme_Warm">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle_Warm</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
     </style>
 
-    <style name="AppTheme.Warm.NoActionBar">
+    <style name="FullscreenActionBarStyle_Warm" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/primary_warm</item>
+    </style>
+
+    <style name="AppTheme_Warm_NoActionBar" parent="AppTheme_Warm">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme_Cold" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary_warm</item>
+        <item name="colorPrimaryDark">@color/primary_dark_warm</item>
+        <item name="android:colorBackground">@color/background_warm</item>
+        <item name="android:colorForeground">@color/primary_dark_warm</item>
+        <item name="colorAccent">@color/accent_warm</item>
+        <item name="android:windowBackground">@color/background_warm</item>
+
     </style>
 
 

@@ -7,7 +7,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="AppTheme.Warm" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme_Warm" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/primary_warm</item>
         <item name="colorPrimaryDark">@color/primary_dark_warm</item>
         <item name="android:colorBackground">@color/background_warm</item>

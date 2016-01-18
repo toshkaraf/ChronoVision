@@ -1,10 +1,11 @@
 package ua.toshkaraf.chronovision;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.view.GestureDetector;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,8 @@ public class PlaceholderFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     FullscreenActivity activity;
-    private GestureDetector mGestureDetector;
+
+//    private GestureDetector mGestureDetector;
 
     public PlaceholderFragment() {
     }
@@ -41,16 +43,18 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.placeholder_fragment, container, false);
+        activity = (FullscreenActivity) getActivity();
+        final Context contextThemeWrapper = new ContextThemeWrapper(activity, ThemeUtil.mAppThemeID);
+        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        View rootView = localInflater.inflate(R.layout.placeholder_fragment, container, false);
         TextView textView = (TextView) rootView.findViewById(R.id.section_label);
         textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-        activity = (FullscreenActivity) getActivity();
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 startActivity(new Intent(activity,AddEventActivity.class));
+                startActivity(new Intent(activity, AddEventActivity.class));
             }
         });
 

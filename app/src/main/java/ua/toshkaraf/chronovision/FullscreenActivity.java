@@ -1,9 +1,12 @@
 package ua.toshkaraf.chronovision;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -39,11 +42,18 @@ public class FullscreenActivity extends AppCompatActivity {
     private ViewPager mContentViewPager;
     private View mControlsView;
     private boolean mVisible;
+    ThemeUtil util = new ThemeUtil();
+    int counter = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        Context mContext = getApplicationContext();
+        if (counter++ == 0) util.setContext(mContext);
+        setTheme(ThemeUtil.mFullScreenThemeID);
 
         setContentView(R.layout.activity_fullscreen);
 
@@ -62,7 +72,6 @@ public class FullscreenActivity extends AppCompatActivity {
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
-
     }
 
     @Override
@@ -74,6 +83,21 @@ public class FullscreenActivity extends AppCompatActivity {
         // are available.
         delayedHide(100);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (ThemeUtil.mMainPreferencesChanged) {
+            ThemeUtil.mMainPreferencesChanged = false;
+            this.finish();
+//            final Intent intent = this.getIntent();
+            Intent intent = new Intent(this, FullscreenActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+    }
+
 
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
@@ -187,6 +211,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, MainSettingsActivity.class));
             return true;
         }
 

@@ -7,7 +7,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.Warm">
+        android:theme="@style/AppTheme_Warm">
         <activity
             android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -23,7 +23,15 @@
             android:name=".AddEventActivity"
             android:label="@string/title_activity_add_event"
             android:parentActivityName=".FullscreenActivity"
-            android:theme="@style/AppTheme.Warm.NoActionBar">
+            android:theme="@style/AppTheme_Warm_NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ua.toshkaraf.chronovision.FullscreenActivity" />
+        </activity>
+        <activity
+            android:name=".MainSettingsActivity"
+            android:label="@string/title_activity_main_settings"
+            android:parentActivityName=".FullscreenActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ua.toshkaraf.chronovision.FullscreenActivity" />
