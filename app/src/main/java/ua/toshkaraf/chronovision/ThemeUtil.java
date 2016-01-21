@@ -7,36 +7,22 @@ import android.preference.PreferenceManager;
 /**
  * Created by Антон on 18.01.2016.
  */
-public class ThemeUtil implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class ThemeUtil {
 
     public static int mFullScreenThemeID;
     public static int mAppThemeID;
     public static int mNoActionBarThemeID;
     public static boolean mMainPreferencesChanged;
-    Context mContext;
 
 
-    public ThemeUtil() {
-
-        mMainPreferencesChanged = false;
-    }
-
-    public void setContext(Context context) {
-
+    public static void initialise(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.registerOnSharedPreferenceChangeListener(this);
-
-        setThemes(prefs);
+        setThemes(prefs.getString("pref_theme", ""));
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        mMainPreferencesChanged = true;
-        setThemes(sharedPreferences);
-    }
 
-    private void setThemes(SharedPreferences preferences) {
-        String theme = preferences.getString("pref_theme", "");
+    public static void setThemes(String theme) {
+
         switch (theme) {
             case "Dark":
                 mFullScreenThemeID = R.style.FullscreenTheme;
@@ -55,5 +41,9 @@ public class ThemeUtil implements SharedPreferences.OnSharedPreferenceChangeList
                 mNoActionBarThemeID = R.style.AppTheme_Warm_NoActionBar;
                 break;
         }
+    }
+
+    public static void mainPreferencesChanged() {
+        mMainPreferencesChanged = true;
     }
 }

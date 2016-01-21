@@ -1,7 +1,6 @@
 package ua.toshkaraf.chronovision;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,19 +41,15 @@ public class FullscreenActivity extends AppCompatActivity {
     private ViewPager mContentViewPager;
     private View mControlsView;
     private boolean mVisible;
-    ThemeUtil util = new ThemeUtil();
-    int counter = 0;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        Context mContext = getApplicationContext();
-        if (counter++ == 0) util.setContext(mContext);
+        ThemeUtil.initialise(getApplicationContext());
         setTheme(ThemeUtil.mFullScreenThemeID);
-
         setContentView(R.layout.activity_fullscreen);
 
         mVisible = true;
