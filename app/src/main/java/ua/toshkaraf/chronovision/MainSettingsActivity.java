@@ -3,6 +3,7 @@ package ua.toshkaraf.chronovision;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -15,11 +16,10 @@ import android.view.MenuItem;
 
 public class MainSettingsActivity extends AppCompatPreferenceActivity {
 
-
-
     private static String theme;
     private static Context mContext;
     private static Activity activity;
+    private static SharedPreferences pref;
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -42,6 +42,7 @@ public class MainSettingsActivity extends AppCompatPreferenceActivity {
         super.onCreate(savedInstanceState);
 
         mContext = getApplicationContext();
+        pref = PreferenceManager.getDefaultSharedPreferences(mContext);
         activity = this;
         setTheme(ThemeUtil.mAppThemeID);
         setContentView(R.layout.main_preferences);
@@ -57,7 +58,6 @@ public class MainSettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.main_preferences);
 
             bindPreferenceSummaryToValue(findPreference("pref_theme"));
-
         }
     }
 
@@ -95,22 +95,13 @@ public class MainSettingsActivity extends AppCompatPreferenceActivity {
         return super.onMenuItemSelected(featureId, item);
     }
 
-
-    /**
-     * Binds a preference's summary to its value. More specifically, when the
-     * preference's value is changed, its summary (line of text below the
-     * preference title) is updated to reflect the value. The summary is also
-     * immediately updated upon calling this method. The exact display format is
-     * dependent on the type of preference.
-     */
-
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sPreferenceListener);
 
         // Trigger the listener immediately with the preference's
         // current value.
-        sBindPreferenceSummaryToValue(preference, PreferenceManager.getDefaultSharedPreferences(mContext).getString(preference.getKey(), ""));
+        sBindPreferenceSummaryToValue(preference, pref.getString(preference.getKey(), ""));
     }
 
     /**

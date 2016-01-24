@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -203,11 +204,18 @@ public class FullscreenActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        switch (id){
+            case R.id.open_new_map:{
+            //TODO open new map
+            return true;}
+            case R.id.action_settings:{
+                startActivity(new Intent(this, MainSettingsActivity.class));
+                return true;}
+            case R.id.about_app:{
+                Toast.makeText(this, getResources().getString(R.string.about_app),
+                        Toast.LENGTH_LONG).show();
+                return true;}
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            startActivity(new Intent(this, MainSettingsActivity.class));
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
