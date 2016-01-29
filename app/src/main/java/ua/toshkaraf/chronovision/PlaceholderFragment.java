@@ -9,7 +9,8 @@ import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import ua.toshkaraf.chronovision.Util.ThemeUtil;
 
 /**
  * Created by Антон on 07.01.2016.
@@ -21,7 +22,7 @@ public class PlaceholderFragment extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    FullscreenActivity activity;
+    MainScreenActivity activity;
 
 //    private GestureDetector mGestureDetector;
 
@@ -43,14 +44,14 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        activity = (FullscreenActivity) getActivity();
+        activity = (MainScreenActivity) getActivity();
         final Context contextThemeWrapper = new ContextThemeWrapper(activity, ThemeUtil.mAppThemeID);
         LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
         View rootView = localInflater.inflate(R.layout.placeholder_fragment, container, false);
-        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-        textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+//        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+//        textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.add_event_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

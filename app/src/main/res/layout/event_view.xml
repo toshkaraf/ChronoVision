@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="religion"
-        android:id="@+id/sphere"
+        android:id="@+id/tags"
         android:layout_below="@+id/event_name"
         android:layout_toRightOf="@+id/date"
         android:layout_toEndOf="@+id/date"

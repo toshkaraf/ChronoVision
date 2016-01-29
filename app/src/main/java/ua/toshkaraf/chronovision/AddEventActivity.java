@@ -47,6 +47,10 @@ public class AddEventActivity extends AppCompatActivity {
 
     }
 
+    public AddEventActivity() {
+        super();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -132,9 +136,9 @@ public class AddEventActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "MAIN FEATURES";
+                    return getResources().getString(R.string.add_main_features);
                 case 1:
-                    return "MULTIMEDIA";
+                    return getResources().getString(R.string.add_multimedia);
 //                case 2:
 //                    return "SECTION 3";
             }

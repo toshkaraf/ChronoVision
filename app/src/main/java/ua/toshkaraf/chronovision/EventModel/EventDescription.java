@@ -1,4 +1,4 @@
-package ua.toshkaraf.chronovision.Model;
+package ua.toshkaraf.chronovision.EventModel;
 
 /**
  * Created by Антон on 31.12.2015.

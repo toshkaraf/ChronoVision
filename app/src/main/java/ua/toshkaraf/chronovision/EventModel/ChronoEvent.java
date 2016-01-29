@@ -1,11 +1,14 @@
-package ua.toshkaraf.chronovision.Model;
+package ua.toshkaraf.chronovision.EventModel;
 
 /**
  * Created by Антон on 31.12.2015.
  */
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.GregorianCalendar;
+import java.util.Map;
 import java.util.UUID;
 
 public class ChronoEvent implements Comparable, Serializable {
@@ -13,13 +16,11 @@ public class ChronoEvent implements Comparable, Serializable {
     private String uuid;
     private GregorianCalendar initialDate;
     private GregorianCalendar finalDate;
-    private Integer yearPoint;
     private String name;
-    //    Image image;
     private EventDescription description;
-    private byte significance;  // up to 10
-    String country;
-    private boolean[] sphere; //1-out politic, 2-inner politic, 3-religion, 4-economic, 5-science, 6-culture
+    private int significance;  // up to 10
+    private Map<String, Boolean> tags;
+    private byte media[];
 
     public static final ChronoEvent EMPTY = new ChronoEvent();
 
@@ -57,11 +58,7 @@ public class ChronoEvent implements Comparable, Serializable {
         initialDate.set(year, month, day);
     }
 
-    public int getYear() {
-        return yearPoint;
-    }
-
-    public String getName() {
+        public String getName() {
         return name;
     }
 
@@ -77,7 +74,7 @@ public class ChronoEvent implements Comparable, Serializable {
         this.description = description;
     }
 
-    public byte getSignificance() {
+    public int getSignificance() {
         return significance;
     }
 
@@ -85,22 +82,23 @@ public class ChronoEvent implements Comparable, Serializable {
         this.significance = significance;
     }
 
-    public String getCountry() {
-        return country;
+//    public String getCountry() {
+//        return country;
+//    }
+//
+//    public void setCountry(String country) {
+//        this.country = country;
+//    }
+
+    public Map<String, Boolean> getTags() {
+        return tags;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setTags(Map<String, Boolean> tags) {
+        this.tags = tags;
     }
 
-    public boolean[] getSphere() {
-        return sphere;
-    }
-
-    public void setSphere(boolean[] sphere) {
-        this.sphere = sphere;
-    }
-
+    @NonNull
     @Override
     public int compareTo(Object e) {
         ChronoEvent event = (ChronoEvent) e;

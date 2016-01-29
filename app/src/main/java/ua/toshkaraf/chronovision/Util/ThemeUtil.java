@@ -1,8 +1,10 @@
-package ua.toshkaraf.chronovision;
+package ua.toshkaraf.chronovision.Util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import ua.toshkaraf.chronovision.R;
 
 /**
  * Created by Антон on 18.01.2016.

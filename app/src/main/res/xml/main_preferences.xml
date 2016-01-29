@@ -9,9 +9,12 @@
         android:title="@string/app_themes"
         android:defaultValue="Warm"/>
 
-    <Preference
-        android:key="customPref"
-        android:title="Preference"
-        android:summary="This is Preference"/>
+    <ListPreference
+        android:entries="@array/language_list"
+        android:entryValues="@array/language_list"
+        android:key="pref_lang"
+        android:persistent="true"
+        android:title="@string/app_languages"
+        android:defaultValue="English"/>
 
 </PreferenceScreen>

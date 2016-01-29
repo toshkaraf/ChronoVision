@@ -6,20 +6,46 @@
     tools:context="ua.toshkaraf.chronovision.PlaceholderFragment">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/add_event_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="end|bottom"
-        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_gravity="end|top"
+        android:layout_marginRight="20dp"
         android:alpha="0.5"
-        android:src="@android:drawable/ic_input_add" />
+        android:src="@android:drawable/ic_menu_add"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
 
-    <TextView
-        android:id="@+id/section_label"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/filter_event_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:layout_marginRight="27dp"
+        android:alpha="0.5"
+        android:src="@android:drawable/ic_menu_manage"
+        android:layout_marginEnd="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/add_event_button"
+        android:layout_toStartOf="@+id/add_event_button" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/map_properties_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:layout_marginRight="26dp"
+        android:alpha="0.5"
+        android:src="@android:drawable/ic_menu_edit"
+        android:layout_marginEnd="26dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/filter_event_button"
+        android:layout_toStartOf="@+id/filter_event_button" />
+
+
 
 
 </RelativeLayout>

@@ -15,11 +15,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import ua.toshkaraf.chronovision.Util.ThemeUtil;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class FullscreenActivity extends AppCompatActivity {
+public class MainScreenActivity extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -38,12 +40,9 @@ public class FullscreenActivity extends AppCompatActivity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mContentViewPager;
     private View mControlsView;
     private boolean mVisible;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +50,13 @@ public class FullscreenActivity extends AppCompatActivity {
 
         ThemeUtil.initialise(getApplicationContext());
         setTheme(ThemeUtil.mFullScreenThemeID);
-        setContentView(R.layout.activity_fullscreen);
+        setContentView(R.layout.activity_main_screen);
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentViewPager = (ViewPager) findViewById(R.id.container);
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mContentViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -88,7 +87,7 @@ public class FullscreenActivity extends AppCompatActivity {
             ThemeUtil.mMainPreferencesChanged = false;
             this.finish();
 //            final Intent intent = this.getIntent();
-            Intent intent = new Intent(this, FullscreenActivity.class);
+            Intent intent = new Intent(this, MainScreenActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
@@ -220,4 +219,5 @@ public class FullscreenActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
