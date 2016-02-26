@@ -70,6 +70,9 @@
     <string name="other">other</string>
     <string name="custom_tag">custom tag</string>
 
+    <string name="toast_invalide_name">The field "Name" could not be empty</string>
+
+
     <string-array name="tags_spinner">
         <item>foreign policy</item>
         <item>domestic policy</item>

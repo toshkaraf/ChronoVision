@@ -1,6 +1,7 @@
 package ua.toshkaraf.chronovision.Storage;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,33 +14,35 @@ import ua.toshkaraf.chronovision.EventModel.ChronoEvent;
 
 public class TimeMap {
     List<ChronoEvent> list = new ArrayList<>();
-    String mapName;
-    String tags[];
+    String mMapName;
+    String mTags[];
     Context mContext;
     DBOpenHelper mDBOpenHelper;
+    SQLiteDatabase mDb;
 
     public TimeMap(Context context, String mapName, String tags[]) {
-        this.mapName = mapName;
-        this.tags = tags;
-        mDBOpenHelper = new DBOpenHelper(context, mapName, null, 1);
-        mDBOpenHelper.setDBTags(tags);
+        this.mMapName = mapName;
+        this.mTags = tags;
+        mDBOpenHelper = new DBOpenHelper(context, mapName, tags, null, 1);
+        mDb = mDBOpenHelper.getWritableDatabase();
     }
 
-    protected boolean exist(Integer idx) {
-        return idx >= 0;
-    }
-
-    protected Integer getContext(String uuid) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getUuid().equals(uuid)) {
-                return i;
-            }
-        }
-        return -1;
-    }
+//    protected boolean exist(Integer idx) {
+//        return idx >= 0;
+//    }
+//
+//    protected Integer getContext(String uuid) {
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).getUuid().equals(uuid)) {
+//                return i;
+//            }
+//        }
+//        return -1;
+//    }
 
     protected void Clear() {
-        list.clear();
+        mDb.delete(DBOpenHelper.MAIN_TABLE_NAME, null, null);
+        mDb.delete(DBOpenHelper.TAGS_TABLE_NAME, null, null);
     }
 
 

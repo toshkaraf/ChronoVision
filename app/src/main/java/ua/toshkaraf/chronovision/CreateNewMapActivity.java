@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 
@@ -17,7 +18,7 @@ public class CreateNewMapActivity extends AppCompatActivity {
     private TimeMap newTimeMap;
     private CheckBox tagsCheckBox[];
     private LinkedList<String> tags;
-    private TextView name;
+    private EditText editName;
     private Context mContext;
 
     @Override
@@ -36,25 +37,28 @@ public class CreateNewMapActivity extends AppCompatActivity {
                 (CheckBox) findViewById(R.id.checkBox6),
                 (CheckBox) findViewById(R.id.checkBox7),
         };
-        name = (TextView) findViewById(R.id.event_name);
+        editName = (EditText) findViewById(R.id.edit_name);
 
-        findViewById(R.id.create_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tags = new LinkedList<>();
-                for (CheckBox chBox : tagsCheckBox) {
-                    if (chBox.isChecked())
-                        tags.add((String) chBox.getText());
-                }
+        findViewById(R.id.create_button).
+                setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           String name = editName.getText().toString();
 
-                if (name != null) {
-                    newTimeMap = new TimeMap(mContext,(String) name.getText(), (String[]) tags.toArray());
-                    
-                    startActivity(new Intent(mContext, MainScreenActivity.class));
-                }
-            }
-        }
+                                           if (!name.equals("")) {
+                                               tags = new LinkedList<>();
+                                               for (CheckBox chBox : tagsCheckBox) {
+                                                   if (chBox.isChecked())
+                                                       tags.add(chBox.getText().toString());
+                                               }
 
-        );
+                                               newTimeMap = new TimeMap(mContext, name, tags.toArray(new String[tags.size()]));
+                                               startActivity(new Intent(CreateNewMapActivity.this, MainScreenActivity.class));
+                                           } else
+                                               Toast.makeText(CreateNewMapActivity.this, mContext.getResources().getText(R.string.toast_invalide_name), Toast.LENGTH_SHORT).show();
+                                       }
+                                   }
+
+                );
     }
 }
