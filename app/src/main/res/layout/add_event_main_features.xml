@@ -22,10 +22,11 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_row="1"
-        android:layout_column="1">
+        android:layout_column="1"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,25 +34,33 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/initial_date"
             android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="center_horizontal" />
+            android:layout_gravity="left|center_vertical" />
 
-        <DatePicker
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/datePicker"
-            android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1" />
+            android:inputType="date"
+            android:ems="5"
+            android:id="@+id/initial_date_field"
+            android:hint="@string/date_model"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_picker_button"
+            android:id="@+id/initial_time_picker_button"
+            android:layout_gravity="right" />
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_row="2"
-        android:layout_column="1">
+        android:layout_column="1"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,17 +68,24 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/finale_date"
             android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_gravity="left|center_vertical"
             android:gravity="center_horizontal" />
 
-        <DatePicker
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/datePicker2"
-            android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1" />
+            android:inputType="date"
+            android:ems="5"
+            android:id="@+id/finale_date_field"
+            android:hint="@string/date_model"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_picker_button"
+            android:id="@+id/finale_time_picker_button"
+            android:layout_gravity="right" />
     </LinearLayout>
 
 </GridLayout>

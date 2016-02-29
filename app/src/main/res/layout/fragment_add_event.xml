@@ -6,11 +6,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ua.toshkaraf.chronovision.AddEventActivity$PlaceholderFragment">
+    tools:context=".AddEvent.AddEventActivity$PlaceholderFragment">
 
     <TextView
         android:id="@+id/section_add_label"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="красота неземная" />
 
 </RelativeLayout>

@@ -14,19 +14,16 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public static final String GENERAL_TABLE_NAME = "GENERAL_TABLE";
     public static final String MAP_INITIAL_DATE = "MAP_INITIAL_DATE";
     public static final String MAP_FINALE_DATE = "MAP_FINALE_DATE";
-    public String mMapName;
 
-    public static final String MAIN_TABLE_NAME = "MAIN_TABLE";
+
+    public static final String EVENT_TABLE_NAME = "EVENT_TABLE";
     public static final String EVENT_NAME = "EVENT_NAME";
     public static final String INITIAL_DATE = "INITIAL_DATE";
     public static final String FINALE_DATE = "FINALE_DATE";
     public static final String DESCRIPTION = "DESCRIPTION";
     public static final String SIGNIFICANCE = "SIGNIFICANCE";
-
-    public static final String TAGS_TABLE_NAME = "TAGS_TABLE";
     public String mTags[];
 
-    public static final String MULTIMEDIA_TABLE_NAME = "MULTIMEDIA_TABLE";
     public static final String PICTURE = "PICTURE";
     public static final String VIDEO = "VIDEO";
 
@@ -35,7 +32,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                         SQLiteDatabase.CursorFactory factory, int version) {
         super(context, mapName, factory, version);
         this.mDatabaseVersion = version;
-        this.mMapName = mapName;
         this.mTags = tags;
     }
 
@@ -47,7 +43,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 + MAP_INITIAL_DATE + " TEXT,"
                 + MAP_FINALE_DATE + " TEXT)");
 
-        db.execSQL("CREATE TABLE " + MAIN_TABLE_NAME + "("
+        db.execSQL("CREATE TABLE " + EVENT_TABLE_NAME + "("
                 + "_id INTEGER PRIMARY KEY, "
                 + EVENT_NAME + " TEXT,"
                 + INITIAL_DATE + " TEXT,"
@@ -55,12 +51,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 + DESCRIPTION + " TEXT,"
                 + SIGNIFICANCE + " INTEGER)");
 
-        db.execSQL("CREATE TABLE " + TAGS_TABLE_NAME + " ("
-                + "_id INTEGER PRIMARY KEY)");
-
         for (String tag : mTags) {
-            tag = tag.replaceAll(" ", "_");
-            db.execSQL("ALTER TABLE " + TAGS_TABLE_NAME + " ADD COLUMN " + tag + " INTEGER;");
+            db.execSQL("ALTER TABLE " + EVENT_TABLE_NAME + " ADD COLUMN " + tag + " NUMERIC;");
         }
     }
 

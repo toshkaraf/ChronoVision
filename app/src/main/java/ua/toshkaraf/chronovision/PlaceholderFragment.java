@@ -10,16 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import ua.toshkaraf.chronovision.AddEvent.AddEventActivity;
 import ua.toshkaraf.chronovision.Util.ThemeUtil;
 
 /**
  * Created by Антон on 07.01.2016.
  */
 public class PlaceholderFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     MainScreenActivity activity;

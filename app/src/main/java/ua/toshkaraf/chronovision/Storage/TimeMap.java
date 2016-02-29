@@ -3,9 +3,6 @@ package ua.toshkaraf.chronovision.Storage;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ua.toshkaraf.chronovision.EventModel.ChronoEvent;
 
 /**
@@ -13,12 +10,12 @@ import ua.toshkaraf.chronovision.EventModel.ChronoEvent;
  */
 
 public class TimeMap {
-    List<ChronoEvent> list = new ArrayList<>();
-    String mMapName;
-    String mTags[];
+
     Context mContext;
     DBOpenHelper mDBOpenHelper;
     SQLiteDatabase mDb;
+    String mMapName;
+    String mTags[];
 
     public TimeMap(Context context, String mapName, String tags[]) {
         this.mMapName = mapName;
@@ -41,37 +38,36 @@ public class TimeMap {
 //    }
 
     protected void Clear() {
-        mDb.delete(DBOpenHelper.MAIN_TABLE_NAME, null, null);
-        mDb.delete(DBOpenHelper.TAGS_TABLE_NAME, null, null);
+        mDb.delete(DBOpenHelper.EVENT_TABLE_NAME, null, null);
     }
 
 
-    protected void Save(ChronoEvent r, Integer idx) {
-        list.add(r);
+    protected void SaveEvent(ChronoEvent chronoEvent) {
+        mDb.insert(DBOpenHelper.EVENT_TABLE_NAME, null, null);
     }
 
 
-    protected void Update(ChronoEvent r, Integer idx) {
-        list.set(idx, r);
-    }
-
-
-    protected ChronoEvent Load(Integer idx) {
-        return list.get(idx);
-    }
-
-
-    protected void Delete(Integer idx) {
-        list.remove((idx).intValue());
-    }
-
-
-    protected List<ChronoEvent> doGetAll() {
-        return new ArrayList<>(list);
-    }
-
-
-    public int size() {
-        return list.size();
-    }
+//    protected void Update(ChronoEvent r, Integer idx) {
+//        list.set(idx, r);
+//    }
+//
+//
+//    protected ChronoEvent Load(Integer idx) {
+//        return list.get(idx);
+//    }
+//
+//
+//    protected void Delete(Integer idx) {
+//        list.remove((idx).intValue());
+//    }
+//
+//
+//    protected List<ChronoEvent> doGetAll() {
+//        return new ArrayList<>(list);
+//    }
+//
+//
+//    public int size() {
+//        return list.size();
+//    }
 }

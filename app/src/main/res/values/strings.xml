@@ -28,8 +28,7 @@
     <!--AddEventActivity-->
     <string name="add_main_features">MAIN FEATURES</string>
     <string name="add_multimedia">MULTIMEDIA</string>
-
-
+    <string name="add_tags">TAGS</string>
 
 
     <string-array name="themes_list">
@@ -82,5 +81,18 @@
         <item>economy</item>
         <item>science</item>
     </string-array>
+
+
+    <!-- DatePickerFragment -->
+    <string name="cancel">Cancel</string>
+    <string name="pick">Pick</string>
+    <string name="BC">BC</string>
+    <string name="date_model">dd/mm/yyyy</string>
+    <string name="time_picker_button">pick time</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="BC_checkbox">BC</string>
+    <string name="ok_button">Ok</string>
 
 </resources>

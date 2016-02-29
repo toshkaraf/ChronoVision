@@ -49,7 +49,7 @@ public class CreateNewMapActivity extends AppCompatActivity {
                                                tags = new LinkedList<>();
                                                for (CheckBox chBox : tagsCheckBox) {
                                                    if (chBox.isChecked())
-                                                       tags.add(chBox.getText().toString());
+                                                       tags.add(chBox.getText().toString().replaceAll(" ", "_"));
                                                }
 
                                                newTimeMap = new TimeMap(mContext, name, tags.toArray(new String[tags.size()]));

@@ -4,12 +4,15 @@ package ua.toshkaraf.chronovision.EventModel;
  * Created by Антон on 31.12.2015.
  */
 
+import android.content.ContentValues;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.UUID;
+
+import ua.toshkaraf.chronovision.Storage.DBOpenHelper;
 
 public class ChronoEvent implements Comparable, Serializable {
 
@@ -19,8 +22,21 @@ public class ChronoEvent implements Comparable, Serializable {
     private String name;
     private EventDescription description;
     private int significance;  // up to 10
-    private Map<String, Boolean> tags;
+    private Map<String, Integer> tags;
     private byte media[];
+
+    private ContentValues preparedEventValues(){
+        ContentValues cv = new ContentValues();
+        cv.put(DBOpenHelper.EVENT_NAME, name);
+        cv.put(DBOpenHelper.INITIAL_DATE, name);
+        cv.put(DBOpenHelper.FINALE_DATE, name);
+        cv.put(DBOpenHelper.DESCRIPTION, description.getText());
+        cv.put(DBOpenHelper.SIGNIFICANCE, significance);
+        for (Map.Entry<String, Integer> tag : tags.entrySet()){
+            cv.put(tag.getKey(), tag.getValue());
+        }
+        return cv;
+    }
 
     public static final ChronoEvent EMPTY = new ChronoEvent();
 
@@ -90,11 +106,11 @@ public class ChronoEvent implements Comparable, Serializable {
 //        this.country = country;
 //    }
 
-    public Map<String, Boolean> getTags() {
+    public Map<String, Integer> getTags() {
         return tags;
     }
 
-    public void setTags(Map<String, Boolean> tags) {
+    public void setTags(Map<String, Integer> tags) {
         this.tags = tags;
     }
 
