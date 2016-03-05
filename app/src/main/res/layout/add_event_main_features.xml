@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="2"
-    android:rowCount="7"
     android:orientation="vertical"
     android:padding="@dimen/abc_action_bar_icon_vertical_padding_material"
     android:paddingLeft="@dimen/abc_action_bar_icon_vertical_padding_material"
@@ -13,46 +11,96 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
         android:text="@string/add_event_title"
         android:layout_row="0"
         android:layout_column="1"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material" />
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/name"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
+        android:layout_gravity="left|center_vertical"
+        android:id="@+id/name"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/name_field"
+        android:layout_gravity="center_horizontal"
+        android:hint="@string/event_name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/initial_date"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
+        android:layout_gravity="left|center_vertical"
+        android:textStyle="bold" />
+
+    <fragment
+        android:id="@+id/pick_initial_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="ua.toshkaraf.chronovision.Util.NewDatePickerFragment" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_row="1"
-        android:layout_column="1"
         android:layout_gravity="center_horizontal">
 
-        <TextView
+        <CheckBox
+            android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/initial_date"
-            android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
-            android:layout_gravity="left|center_vertical" />
+            android:layout_gravity="center"
+            android:checked="false"
+            android:text="@string/BC"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:ems="5"
+            android:ems="7"
             android:id="@+id/initial_date_field"
             android:hint="@string/date_model"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/time_picker_button"
             android:id="@+id/initial_time_picker_button"
+            android:src="@android:drawable/ic_menu_my_calendar"
             android:layout_gravity="right" />
-
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/finale_date"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
+        android:layout_gravity="left|center_vertical"
+        android:gravity="center_horizontal"
+        android:textStyle="bold" />
+
+    <fragment
+        android:id="@+id/pick_final_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="ua.toshkaraf.chronovision.Util.NewDatePickerFragment" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -62,30 +110,49 @@
         android:layout_column="1"
         android:layout_gravity="center_horizontal">
 
-        <TextView
+        <CheckBox
+            android:id="@+id/checkBox8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/finale_date"
-            android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
-            android:layout_gravity="left|center_vertical"
-            android:gravity="center_horizontal" />
+            android:layout_gravity="center"
+            android:checked="false"
+            android:text="@string/BC"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:ems="5"
+            android:ems="7"
             android:id="@+id/finale_date_field"
             android:hint="@string/date_model"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/time_picker_button"
-            android:id="@+id/finale_time_picker_button"
-            android:layout_gravity="right" />
+            android:src="@android:drawable/ic_menu_my_calendar"
+            android:layout_gravity="right"
+            android:id="@+id/finale_time_picker_button" />
+
     </LinearLayout>
 
-</GridLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_start_material"
+        android:layout_gravity="left|center_vertical"
+        android:id="@+id/event_description"
+        android:text="@string/description"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText" />
+
+</LinearLayout>

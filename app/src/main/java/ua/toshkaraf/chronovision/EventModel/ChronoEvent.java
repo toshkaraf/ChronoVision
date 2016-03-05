@@ -25,18 +25,18 @@ public class ChronoEvent implements Comparable, Serializable {
     private Map<String, Integer> tags;
     private byte media[];
 
-    private ContentValues preparedEventValues(){
-        ContentValues cv = new ContentValues();
-        cv.put(DBOpenHelper.EVENT_NAME, name);
-        cv.put(DBOpenHelper.INITIAL_DATE, name);
-        cv.put(DBOpenHelper.FINALE_DATE, name);
-        cv.put(DBOpenHelper.DESCRIPTION, description.getText());
-        cv.put(DBOpenHelper.SIGNIFICANCE, significance);
-        for (Map.Entry<String, Integer> tag : tags.entrySet()){
-            cv.put(tag.getKey(), tag.getValue());
-        }
-        return cv;
-    }
+//    private ContentValues preparedEventValues(){
+//        ContentValues cv = new ContentValues();
+//        cv.put(DBOpenHelper.EVENT_NAME, name);
+//        cv.put(DBOpenHelper.INITIAL_DATE, );
+//        cv.put(DBOpenHelper.FINALE_DATE, name);
+//        cv.put(DBOpenHelper.DESCRIPTION, description.getText());
+//        cv.put(DBOpenHelper.SIGNIFICANCE, significance);
+//        for (Map.Entry<String, Integer> tag : tags.entrySet()){
+//            cv.put(tag.getKey(), tag.getValue());
+//        }
+//        return cv;
+//    }
 
     public static final ChronoEvent EMPTY = new ChronoEvent();
 
@@ -46,6 +46,10 @@ public class ChronoEvent implements Comparable, Serializable {
     public ChronoEvent(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
+
+//    public ChronoEvent(String fullName,) {
+//        this(UUID.randomUUID().toString(), fullName);
+//    }
 
     public ChronoEvent(String uuid, String name) {
         requireNonNull(name);

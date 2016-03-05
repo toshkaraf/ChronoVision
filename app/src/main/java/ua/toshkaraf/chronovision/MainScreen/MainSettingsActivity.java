@@ -1,4 +1,4 @@
-package ua.toshkaraf.chronovision;
+package ua.toshkaraf.chronovision.MainScreen;
 
 
 import android.app.Activity;
@@ -14,6 +14,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
+import ua.toshkaraf.chronovision.R;
 import ua.toshkaraf.chronovision.Util.ThemeUtil;
 
 public class MainSettingsActivity extends AppCompatPreferenceActivity {

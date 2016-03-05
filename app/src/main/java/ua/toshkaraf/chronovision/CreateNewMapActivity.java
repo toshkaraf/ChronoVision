@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.LinkedList;
 
+import ua.toshkaraf.chronovision.MainScreen.MainScreenActivity;
 import ua.toshkaraf.chronovision.Storage.TimeMap;
 
 public class CreateNewMapActivity extends AppCompatActivity {

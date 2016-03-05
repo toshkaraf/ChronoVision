@@ -1,4 +1,4 @@
-package ua.toshkaraf.chronovision;
+package ua.toshkaraf.chronovision.MainScreen;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import ua.toshkaraf.chronovision.R;
 import ua.toshkaraf.chronovision.Util.ThemeUtil;
 
 /**

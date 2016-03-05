@@ -1,4 +1,4 @@
-package ua.toshkaraf.chronovision;
+package ua.toshkaraf.chronovision.MainScreen;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

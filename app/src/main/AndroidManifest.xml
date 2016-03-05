@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme_Warm">
         <activity
-            android:name=".MainScreenActivity"
+            android:name=".MainScreen.MainScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme_Warm">
@@ -20,21 +20,21 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".AddEvent.AddEventActivity"
+            android:name=".AddEventActivity"
             android:label="@string/title_activity_add_event"
-            android:parentActivityName=".MainScreenActivity"
+            android:parentActivityName=".MainScreen.MainScreenActivity"
             android:theme="@style/AppTheme_Warm_NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainScreenActivity" />
+                android:value=".MainScreen.MainScreenActivity" />
         </activity>
         <activity
-            android:name=".MainSettingsActivity"
+            android:name=".MainScreen.MainSettingsActivity"
             android:label="@string/title_activity_main_settings"
-            android:parentActivityName=".MainScreenActivity">
+            android:parentActivityName=".MainScreen.MainScreenActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainScreenActivity" />
+                android:value=".MainScreen.MainScreenActivity" />
         </activity>
         <activity android:name=".CreateNewMapActivity" />
         <activity android:name=".InitialActivity">

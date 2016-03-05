@@ -1,20 +1,27 @@
-package ua.toshkaraf.chronovision.AddEvent;
+package ua.toshkaraf.chronovision;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
+import ua.toshkaraf.chronovision.EventModel.ChronoEvent;
 import ua.toshkaraf.chronovision.R;
+import ua.toshkaraf.chronovision.Util.DatePickerFragment;
 
 public class AddEventActivity extends AppCompatActivity  {
 
@@ -25,8 +32,11 @@ public class AddEventActivity extends AppCompatActivity  {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
-    private static EditText initialDateField;
-    private static EditText finaleDateField;
+    private static EditText mEventName;
+    private static EditText mDescription;
+    private static EditText mInitialDateField;
+    private static EditText mFinaleDateField;
+    private static ChronoEvent newChronoEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +55,12 @@ public class AddEventActivity extends AppCompatActivity  {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//
                 Snackbar.make(view, "Event is saved", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
-
 
 
     @Override
@@ -75,63 +85,72 @@ public class AddEventActivity extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
-//    /**
-//     * A placeholder fragment containing a simple view.
-//     */
-//    public static class PlaceholderFragment extends Fragment {
-//        /**
-//         * The fragment argument representing the section number for this
-//         * fragment.
-//         */
-//        private static final String ARG_SECTION_NUMBER = "section_number";
-//
-//        public PlaceholderFragment() {
-//        }
-//
-//        /**
-//         * Returns a new instance of this fragment for the given section
-//         * number.
-//         */
-//        public static PlaceholderFragment newInstance(int sectionNumber) {
-//            PlaceholderFragment fragment = new PlaceholderFragment();
-//            Bundle args = new Bundle();
-//            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//            fragment.setArguments(args);
-//            return fragment;
-//        }
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                                 Bundle savedInstanceState) {
-//            Integer sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
-//            View rootView;
-//            switch (sectionNumber) {
-//                case 1:
-//                    rootView = inflater.inflate(R.layout.add_event_main_features, container, false);
-//
-//
-////                public void onFocusChange (View view,boolean hasfocus){
-////                    if (hasfocus) {
-////                        DatePickerFragment dialog = new DatePickerFragment(view);
-////                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-////                        dialog.show(ft, "DatePicker");
-////                    }
-//
-//                case 2:
-//                    rootView = inflater.inflate(R.layout.add_multimedia, container, false);
-//                case 3:
-//                    rootView = inflater.inflate(R.layout.add_tags, container, false);
-//                default:
-//                    rootView = inflater.inflate(R.layout.add_event_main_features, container, false);
-//            }
-//            return rootView;
-//        }
-//    }
+    public static class AddActivityPlaceholderFragment extends Fragment {
+
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        public static AddActivityPlaceholderFragment newInstance(int sectionNumber) {
+            AddActivityPlaceholderFragment fragment = new AddActivityPlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            Integer sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
+            View rootView;
+            ImageButton initialDateFieldButton;
+            ImageButton finaleDateFieldButton;
+            switch (sectionNumber) {
+                case 1:
+                    rootView = inflater.inflate(R.layout.add_event_main_features, container, false);
+                    mInitialDateField = (EditText) rootView.findViewById(R.id.initial_date_field);
+                    mFinaleDateField = (EditText) rootView.findViewById(R.id.finale_date_field);
+                    initialDateFieldButton = (ImageButton) rootView.findViewById(R.id.initial_time_picker_button);
+                    finaleDateFieldButton = (ImageButton) rootView.findViewById(R.id.finale_time_picker_button);
+                    initialDateFieldButton.setOnClickListener(new OnClickListenerForDatePickerButton(getActivity(), mInitialDateField));
+                    finaleDateFieldButton.setOnClickListener(new OnClickListenerForDatePickerButton(getActivity(), mFinaleDateField));
+                    break;
+                case 2:
+                    rootView = inflater.inflate(R.layout.add_multimedia, container, false);
+                    break;
+                case 3:
+                    rootView = inflater.inflate(R.layout.add_tags, container, false);
+                    break;
+                default:
+                    rootView = inflater.inflate(R.layout.add_event_main_features, container, false);
+
+            }
+            return rootView;
+        }
+    }
+
+    public static class OnClickListenerForDatePickerButton implements View.OnClickListener {
+        EditText mWhereShowPickedData;
+        FragmentActivity activity;
+
+        OnClickListenerForDatePickerButton(FragmentActivity activity,EditText whereShowPickedData) {
+            this.mWhereShowPickedData = whereShowPickedData;
+            this.activity = activity;
+        }
+
+        @Override
+        public void onClick(View view) {
+            DatePickerFragment dialog = DatePickerFragment.newInstance(mWhereShowPickedData);
+            FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+            dialog.show(ft, "DatePicker");
+        }
+
+    }
 //
 //    /**
 //     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 //     * one of the sections/tabs/pages.
 //     */
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -164,4 +183,5 @@ public class AddEventActivity extends AppCompatActivity  {
             return null;
         }
     }
+
 }

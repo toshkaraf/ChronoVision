@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="add_event_title">Enter informatin about your event</string>
-    <string name="initial_date">Initial date</string>
-    <string name="finale_date">Final date</string>
+
 </resources>

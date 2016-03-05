@@ -2,29 +2,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ua.toshkaraf.chronovision.Util.DatePickerFragment"
+    android:orientation="vertical"
     android:weightSum="1"
-    android:orientation="vertical">
+    tools:context="ua.toshkaraf.chronovision.Util.DatePickerFragment"
+    android:isScrollContainer="true">
 
 
-    <DatePicker
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/datePicker3"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/BC"
-        android:id="@+id/BC_checkBox"
-        android:checked="false"
-        android:layout_gravity="center_horizontal" />
+        <DatePicker
+            android:id="@+id/datePicker3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/please_select_a_date"
+            android:maxDate="2100"
+            android:minDate="1000"
+            android:calendarViewShown="false" />
+
+    </LinearLayout>
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/ok_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ok_button"
-        android:id="@+id/ok_button" />
+        android:text="@string/ok_button" />
 
 </LinearLayout>

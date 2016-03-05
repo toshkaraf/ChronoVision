@@ -1,5 +1,6 @@
 package ua.toshkaraf.chronovision.Storage;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -16,6 +17,7 @@ public class TimeMap {
     SQLiteDatabase mDb;
     String mMapName;
     String mTags[];
+    ContentValues contentValues;
 
     public TimeMap(Context context, String mapName, String tags[]) {
         this.mMapName = mapName;
@@ -70,4 +72,6 @@ public class TimeMap {
 //    public int size() {
 //        return list.size();
 //    }
+
+
 }

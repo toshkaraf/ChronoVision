@@ -1,4 +1,4 @@
-package ua.toshkaraf.chronovision;
+package ua.toshkaraf.chronovision.MainScreen;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
