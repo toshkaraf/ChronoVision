@@ -4,7 +4,6 @@ package ua.toshkaraf.chronovision.EventModel;
  * Created by Антон on 31.12.2015.
  */
 
-import android.content.ContentValues;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
@@ -12,13 +11,11 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.UUID;
 
-import ua.toshkaraf.chronovision.Storage.DBOpenHelper;
-
 public class ChronoEvent implements Comparable, Serializable {
 
     private String uuid;
-    private GregorianCalendar initialDate;
-    private GregorianCalendar finalDate;
+    private Long initialDate;
+    private Long finalDate;
     private String name;
     private EventDescription description;
     private int significance;  // up to 10
@@ -47,9 +44,10 @@ public class ChronoEvent implements Comparable, Serializable {
         this(UUID.randomUUID().toString(), fullName);
     }
 
-//    public ChronoEvent(String fullName,) {
-//        this(UUID.randomUUID().toString(), fullName);
-//    }
+    public ChronoEvent(String fullName, Boolean bcInitial, int yearInitial, int monthInitial, int dayInitial,
+                       Boolean bcFinal, int yearFinal, int monthFinal, int dayFinal) {
+        this(UUID.randomUUID().toString(), fullName);
+    }
 
     public ChronoEvent(String uuid, String name) {
         requireNonNull(name);
@@ -62,21 +60,17 @@ public class ChronoEvent implements Comparable, Serializable {
         if (o == null) throw new NullPointerException("the field must not be null");
     }
 
-    public void setInitialDate(int year, int month, int day) {
-        initialDate.set(year, month, day);
-    }
+    public void setInitialDate(int year, int month, int day) {  }
 
-    public GregorianCalendar getInitialDate() {
+    public Long getInitialDate() {
         return initialDate;
     }
 
-    public GregorianCalendar getFinalDate() {
+    public Long getFinalDate() {
         return finalDate;
     }
 
-    public void setFinalDate(int year, int month, int day) {
-        initialDate.set(year, month, day);
-    }
+    public void setFinalDate(int year, int month, int day) {   }
 
         public String getName() {
         return name;

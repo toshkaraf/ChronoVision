@@ -42,13 +42,13 @@ public class DatePickerFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mActivity = getActivity();
-        View v = mActivity.getLayoutInflater().inflate(R.layout.fragment_date_picker, null);
+        View v = mActivity.getLayoutInflater().inflate(R.layout.my_date_picker_fragment, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         builder.setView(v);
         builder.setTitle(getResources().getString(R.string.please_select_a_date));
-        mDatePicker = (DatePicker) v.findViewById(R.id.datePicker3);
-//        mCheckBox = (CheckBox) v.findViewById(R.id.BC_checkBox);
-        mOkButton = (Button) v.findViewById(R.id.ok_button);
+//        mDatePicker = (DatePicker) v.findViewById(R.id.datePicker3);
+////        mCheckBox = (CheckBox) v.findViewById(R.id.BC_checkBox);
+//        mOkButton = (Button) v.findViewById(R.id.ok_button);
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

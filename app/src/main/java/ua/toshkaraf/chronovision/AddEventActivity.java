@@ -5,7 +5,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -17,13 +16,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
-import ua.toshkaraf.chronovision.EventModel.ChronoEvent;
-import ua.toshkaraf.chronovision.R;
-import ua.toshkaraf.chronovision.Util.DatePickerFragment;
+import java.text.SimpleDateFormat;
 
-public class AddEventActivity extends AppCompatActivity  {
+import ua.toshkaraf.chronovision.Util.NewDatePickerFragment;
+
+import static java.lang.Thread.sleep;
+
+public class AddEventActivity extends AppCompatActivity {
 
     public AddEventActivity() {
         super();
@@ -32,11 +32,11 @@ public class AddEventActivity extends AppCompatActivity  {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
+
     private static EditText mEventName;
     private static EditText mDescription;
-    private static EditText mInitialDateField;
-    private static EditText mFinaleDateField;
-    private static ChronoEvent newChronoEvent;
+    private static NewDatePickerFragment mInitialDateFragment;
+    private static NewDatePickerFragment mFinalDateFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,19 @@ public class AddEventActivity extends AppCompatActivity  {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//
+                try {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy G");
+                    String initialDateteString = formatter.format(mInitialDateFragment.getCheckedDate(true));
+                    Snackbar.make(view,initialDateteString , Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    sleep(Snackbar.LENGTH_LONG);
+                    String finalDateteString = formatter.format(mFinalDateFragment.getCheckedDate(false));
+                    Snackbar.make(view,finalDateteString , Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }catch (
+                        Exception e){Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();}
+                AddEventActivity.this.finish();
                 Snackbar.make(view, "Event is saved", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -102,17 +114,12 @@ public class AddEventActivity extends AppCompatActivity  {
                                  Bundle savedInstanceState) {
             Integer sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             View rootView;
-            ImageButton initialDateFieldButton;
-            ImageButton finaleDateFieldButton;
             switch (sectionNumber) {
                 case 1:
                     rootView = inflater.inflate(R.layout.add_event_main_features, container, false);
-                    mInitialDateField = (EditText) rootView.findViewById(R.id.initial_date_field);
-                    mFinaleDateField = (EditText) rootView.findViewById(R.id.finale_date_field);
-                    initialDateFieldButton = (ImageButton) rootView.findViewById(R.id.initial_time_picker_button);
-                    finaleDateFieldButton = (ImageButton) rootView.findViewById(R.id.finale_time_picker_button);
-                    initialDateFieldButton.setOnClickListener(new OnClickListenerForDatePickerButton(getActivity(), mInitialDateField));
-                    finaleDateFieldButton.setOnClickListener(new OnClickListenerForDatePickerButton(getActivity(), mFinaleDateField));
+                    mInitialDateFragment = insertDatePickerFragment(R.id.pick_initial_date);
+                    mFinalDateFragment = insertDatePickerFragment(R.id.pick_final_date);
+                    mEventName = (EditText) rootView.findViewById(R.id.name_field);
                     break;
                 case 2:
                     rootView = inflater.inflate(R.layout.add_multimedia, container, false);
@@ -126,25 +133,36 @@ public class AddEventActivity extends AppCompatActivity  {
             }
             return rootView;
         }
-    }
 
-    public static class OnClickListenerForDatePickerButton implements View.OnClickListener {
-        EditText mWhereShowPickedData;
-        FragmentActivity activity;
 
-        OnClickListenerForDatePickerButton(FragmentActivity activity,EditText whereShowPickedData) {
-            this.mWhereShowPickedData = whereShowPickedData;
-            this.activity = activity;
-        }
-
-        @Override
-        public void onClick(View view) {
-            DatePickerFragment dialog = DatePickerFragment.newInstance(mWhereShowPickedData);
-            FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-            dialog.show(ft, "DatePicker");
+        // Embeds the child fragment dynamically
+        private NewDatePickerFragment insertDatePickerFragment(int id) {
+            NewDatePickerFragment datePickerFragment = new NewDatePickerFragment();
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.add(id, datePickerFragment).commit();
+            return datePickerFragment;
         }
 
     }
+
+
+//    public static class OnClickListenerForDatePickerButton implements View.OnClickListener {
+//        EditText mWhereShowPickedData;
+//        FragmentActivity activity;
+//
+//        OnClickListenerForDatePickerButton(FragmentActivity activity,EditText whereShowPickedData) {
+//            this.mWhereShowPickedData = whereShowPickedData;
+//            this.activity = activity;
+//        }
+//
+//        @Override
+//        public void onClick(View view) {
+//            DatePickerFragment dialog = DatePickerFragment.newInstance(mWhereShowPickedData);
+//            FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+//            dialog.show(ft, "DatePicker");
+//        }
+//
+//    }
 //
 //    /**
 //     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

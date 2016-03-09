@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ua.toshkaraf.chronovision.R;
@@ -16,43 +18,61 @@ import ua.toshkaraf.chronovision.R;
 /**
  * Created by Антон on 04.03.2016.
  */
-public class NewDatePickerFragment extends Fragment  {
+public class NewDatePickerFragment extends Fragment {
 
     android.widget.DatePicker mDatePicker;
     CheckBox mBC_checkBox;
     Spinner mMonthSpinner;
     Spinner mDaySpinner;
     EditText mYear;
+    View rootView;
     Activity mActivity;
-    GregorianCalendar date;
+
     static final String PICKED_DATE = "PICKED_DATE";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        String[] monthData = {"one", "two", "three", "four", "five"};
-        Integer[] dayData = new Integer[31];
-        for (int i=0; i<32; i++){dayData[i]=i;}
+        String[] monthData = getResources().getStringArray(R.array.months);
+        String[] dayData = new String[32];
+        dayData[0] = getActivity().getResources().getString(R.string.day_field);
+        for (Integer i = 1; i < 32; i++) {
+            dayData[i] = i.toString();
+        }
 
-//        View v = inflater.inflate(R.layout.my_date_picker_fragment, container, false);
-//        mBC_checkBox = (CheckBox) v.findViewById(R.id.BC);
-//
-//        mMonthSpinner = (Spinner) v.findViewById(R.id.spinner);
-////        ArrayAdapter monthSpinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, monthData);
-////        monthSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-////        mMonthSpinner.setAdapter(monthSpinnerAdapter);
-//
-//        mDaySpinner = (Spinner) v.findViewById(R.id.spinner2);
-////        ArrayAdapter daySpinnerAdapter = new ArrayAdapter<Integer>(getContext(), android.R.layout.simple_spinner_item, dayData);
-////        monthSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-////        mDaySpinner.setAdapter(daySpinnerAdapter);
-//
-//        mYear = (EditText) v.findViewById(R.id.edit_year);
-        return inflater.inflate(R.layout.my_date_picker_fragment, container, false);
+        rootView = inflater.inflate(R.layout.my_date_picker_fragment, container, false);
+        mBC_checkBox = (CheckBox) rootView.findViewById(R.id.BC);
 
+        mMonthSpinner = (Spinner) rootView.findViewById(R.id.month_spinner);
+        ArrayAdapter monthSpinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, monthData);
+        monthSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mMonthSpinner.setAdapter(monthSpinnerAdapter);
+
+        mDaySpinner = (Spinner) rootView.findViewById(R.id.day_spinner);
+        ArrayAdapter daySpinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, dayData);
+        monthSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mDaySpinner.setAdapter(daySpinnerAdapter);
+
+        mYear = (EditText) rootView.findViewById(R.id.edit_year);
+        return rootView;
     }
 
-//    @Override
-//    public void onFocusChange(View v, boolean hasFocus) {
-//    }
+    public Date getCheckedDate(Boolean isInitialDate) throws Exception {
+        EditText yearField = (EditText) rootView.findViewById(R.id.edit_year);
+        Date dateEvent;
+        if (yearField.getText() != null) {
+            Integer year = Integer.parseInt(String.valueOf(yearField.getText()));
+            if (((CheckBox) rootView.findViewById(R.id.BC)).isChecked()) year = year * (-1);
+            if (year < 2100 && year > -5000) {
+                int month = ((Spinner) rootView.findViewById(R.id.month_spinner)).getLastVisiblePosition();
+                int day = ((Spinner) rootView.findViewById(R.id.day_spinner)).getLastVisiblePosition();
+                GregorianCalendar date = new GregorianCalendar(year, --month, day);
+                dateEvent = date.getTime();
+                if (day > date.getActualMaximum(Calendar.DATE))
+                    throw new NumberFormatException();
+            } else throw new NumberFormatException();
+        } else if (!isInitialDate) return null;
+        else throw new NumberFormatException("ошибька");
+        return dateEvent;
+    }
 }

@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    android:showDividers="middle">
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/BC"
         android:id="@+id/BC"
-        android:checked="false" />
+        android:checked="false"/>
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
+        android:id="@+id/month_spinner"
         android:spinnerMode="dialog"
-        android:prompt="@string/manth_field" />
+        android:prompt="@string/month_field"
+        android:layout_marginLeft="50dp" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner2"
+        android:id="@+id/day_spinner"
         android:spinnerMode="dialog"
-        android:prompt="@string/day_field" />
+        android:prompt="@string/day_field"
+        android:layout_marginLeft="50dp"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:ems="10"
+        android:ems="4"
         android:id="@+id/edit_year"
-        android:hint="year" />
+        android:hint="year"
+        android:textAlignment="center"
+        android:layout_marginLeft="50dp" />
 
 </LinearLayout>
