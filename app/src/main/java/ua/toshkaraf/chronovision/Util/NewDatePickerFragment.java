@@ -27,6 +27,7 @@ public class NewDatePickerFragment extends Fragment {
     EditText mYear;
     View rootView;
     Activity mActivity;
+    int day;
 
     static final String PICKED_DATE = "PICKED_DATE";
 
@@ -65,14 +66,21 @@ public class NewDatePickerFragment extends Fragment {
             if (((CheckBox) rootView.findViewById(R.id.BC)).isChecked()) year = year * (-1);
             if (year < 2100 && year > -5000) {
                 int month = ((Spinner) rootView.findViewById(R.id.month_spinner)).getLastVisiblePosition();
-                int day = ((Spinner) rootView.findViewById(R.id.day_spinner)).getLastVisiblePosition();
+                day = ((Spinner) rootView.findViewById(R.id.day_spinner)).getLastVisiblePosition();
                 GregorianCalendar date = new GregorianCalendar(year, --month, day);
-                dateEvent = date.getTime();
+                if (((CheckBox) rootView.findViewById(R.id.BC)).isChecked()) date.set(Calendar.ERA,GregorianCalendar.BC);
                 if (day > date.getActualMaximum(Calendar.DATE))
                     throw new NumberFormatException();
+                if (year <0) {date.set(Calendar.YEAR, ++year);}
+                dateEvent = date.getTime();
             } else throw new NumberFormatException();
         } else if (!isInitialDate) return null;
         else throw new NumberFormatException("ошибька");
         return dateEvent;
+    }
+
+    public Boolean isFullDate() {
+        if (day > 0) return true;
+        else return false;
     }
 }

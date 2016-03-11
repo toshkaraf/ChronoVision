@@ -46,9 +46,7 @@ public class DatePickerFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         builder.setView(v);
         builder.setTitle(getResources().getString(R.string.please_select_a_date));
-//        mDatePicker = (DatePicker) v.findViewById(R.id.datePicker3);
-////        mCheckBox = (CheckBox) v.findViewById(R.id.BC_checkBox);
-//        mOkButton = (Button) v.findViewById(R.id.ok_button);
+
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,24 +63,5 @@ public class DatePickerFragment extends DialogFragment {
 
         return builder.create();
     }
-
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View v = inflater.inflate(R.layout.fragment_date_picker, container, false);
-//        mDatePicker = (DatePicker) v.findViewById(R.id.datePicker3);
-//        mCheckBox = (CheckBox) v.findViewById(R.id.BC_checkBox);
-//        mOkButton = (Button) v.findViewById(R.id.ok_button);
-//        mOkButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mDateTxtField.setText(mDatePicker.getDayOfMonth() + "/" + mDatePicker.getMonth() + "/" + mDatePicker.getYear());
-//                dismiss();
-//            }
-//        });
-//        return v;
-//    }
-
 
 }

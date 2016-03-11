@@ -18,7 +18,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
+import ua.toshkaraf.chronovision.EventModel.ChronoEvent;
+import ua.toshkaraf.chronovision.MainScreen.PlaceholderFragment;
+import ua.toshkaraf.chronovision.Storage.MapsHolder;
+import ua.toshkaraf.chronovision.Storage.TimeMap;
 import ua.toshkaraf.chronovision.Util.NewDatePickerFragment;
 
 import static java.lang.Thread.sleep;
@@ -55,21 +61,37 @@ public class AddEventActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String[] tags = new String[5];
                 try {
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy G");
-                    String initialDateteString = formatter.format(mInitialDateFragment.getCheckedDate(true));
-                    Snackbar.make(view,initialDateteString , Snackbar.LENGTH_LONG)
+                    ChronoEvent newChronoEvent = new ChronoEvent(
+                            String.valueOf(mEventName.getText()),
+                            mInitialDateFragment.getCheckedDate(true),
+                            mInitialDateFragment.isFullDate(),
+                            mFinalDateFragment.getCheckedDate(false),
+                            mFinalDateFragment.isFullDate(),
+                            tags);
+                    TimeMap map = MapsHolder.getMap(getIntent().getIntExtra(PlaceholderFragment.ARG_CURRENT_MAP_NUMBER, 1));
+                    map.saveEvent(newChronoEvent);
+                    AddEventActivity.this.finish();
+//                    SimpleDateFormat formatter = new SimpleDateFormat("d MMM yyyy G");
+//                    Date date1 = mInitialDateFragment.getCheckedDate(true);
+//                    String initialDateteString = formatter.format(date1);
+//                    GregorianCalendar date = new GregorianCalendar();
+//                    date.setTime(date1);
+//                    Snackbar.make(view, initialDateteString, Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show();
+//                    sleep(Snackbar.LENGTH_LONG);
+//                    String finalDateteString = formatter.format(mFinalDateFragment.getCheckedDate(false));
+//                    Snackbar.make(view, finalDateteString, Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show();
+                } catch (
+                        Exception e) {
+                    Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-                    sleep(Snackbar.LENGTH_LONG);
-                    String finalDateteString = formatter.format(mFinalDateFragment.getCheckedDate(false));
-                    Snackbar.make(view,finalDateteString , Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }catch (
-                        Exception e){Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();}
-                AddEventActivity.this.finish();
-                Snackbar.make(view, "Event is saved", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                }
+
+//                Snackbar.make(view, "Event is saved", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
     }
@@ -144,30 +166,6 @@ public class AddEventActivity extends AppCompatActivity {
         }
 
     }
-
-
-//    public static class OnClickListenerForDatePickerButton implements View.OnClickListener {
-//        EditText mWhereShowPickedData;
-//        FragmentActivity activity;
-//
-//        OnClickListenerForDatePickerButton(FragmentActivity activity,EditText whereShowPickedData) {
-//            this.mWhereShowPickedData = whereShowPickedData;
-//            this.activity = activity;
-//        }
-//
-//        @Override
-//        public void onClick(View view) {
-//            DatePickerFragment dialog = DatePickerFragment.newInstance(mWhereShowPickedData);
-//            FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-//            dialog.show(ft, "DatePicker");
-//        }
-//
-//    }
-//
-//    /**
-//     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-//     * one of the sections/tabs/pages.
-//     */
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 

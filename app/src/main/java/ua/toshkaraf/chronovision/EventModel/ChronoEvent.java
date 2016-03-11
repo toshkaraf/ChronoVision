@@ -4,36 +4,48 @@ package ua.toshkaraf.chronovision.EventModel;
  * Created by Антон on 31.12.2015.
  */
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteCursor;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
+import ua.toshkaraf.chronovision.Storage.DBOpenHelper;
+
 public class ChronoEvent implements Comparable, Serializable {
 
-    private String uuid;
-    private Long initialDate;
-    private Long finalDate;
+    public static final int FULL_DATE = 1;
+    public static final int SHORT_DATE = 0;
+
+    private int isFullInitialDate;
+    private int isFullFinalDate;
+    private int id;
+    private Date initialDate;
+    private Date finalDate;
     private String name;
     private EventDescription description;
     private int significance;  // up to 10
     private Map<String, Integer> tags;
     private byte media[];
 
-//    private ContentValues preparedEventValues(){
-//        ContentValues cv = new ContentValues();
-//        cv.put(DBOpenHelper.EVENT_NAME, name);
-//        cv.put(DBOpenHelper.INITIAL_DATE, );
-//        cv.put(DBOpenHelper.FINALE_DATE, name);
-//        cv.put(DBOpenHelper.DESCRIPTION, description.getText());
-//        cv.put(DBOpenHelper.SIGNIFICANCE, significance);
+    public ContentValues getPreparedEventValues() {
+        ContentValues cv = new ContentValues();
+        cv.put(DBOpenHelper.ID, id);
+        cv.put(DBOpenHelper.EVENT_NAME, name);
+        cv.put(DBOpenHelper.INITIAL_DATE, initialDate.getTime());
+        cv.put(DBOpenHelper.IS_FULL_INITIAL_DATE, isFullInitialDate);
+        cv.put(DBOpenHelper.FINALE_DATE, finalDate.getTime());
+        cv.put(DBOpenHelper.IS_FULL_FINAL_DATE, isFullFinalDate);
+        cv.put(DBOpenHelper.DESCRIPTION, description.getText());
+        cv.put(DBOpenHelper.SIGNIFICANCE, significance);
 //        for (Map.Entry<String, Integer> tag : tags.entrySet()){
 //            cv.put(tag.getKey(), tag.getValue());
 //        }
-//        return cv;
-//    }
+        return cv;
+    }
 
     public static final ChronoEvent EMPTY = new ChronoEvent();
 
@@ -41,18 +53,32 @@ public class ChronoEvent implements Comparable, Serializable {
     }
 
     public ChronoEvent(String fullName) {
-        this(UUID.randomUUID().toString(), fullName);
+        this(Integer.valueOf(UUID.randomUUID().toString()), fullName);
     }
 
-    public ChronoEvent(String fullName, Boolean bcInitial, int yearInitial, int monthInitial, int dayInitial,
-                       Boolean bcFinal, int yearFinal, int monthFinal, int dayFinal) {
-        this(UUID.randomUUID().toString(), fullName);
+    public ChronoEvent(String fullName, Date initialDate, Boolean isFullInitialDate, Date finalDate, Boolean isFullFinalDate, String[] tags) {
+        this(Integer.valueOf(UUID.randomUUID().toString()), fullName);
+        if (isFullInitialDate) this.isFullInitialDate = FULL_DATE;
+        else this.isFullInitialDate = SHORT_DATE;
+        if (isFullFinalDate) this.isFullFinalDate = FULL_DATE;
+        else this.isFullFinalDate = SHORT_DATE;
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
     }
 
-    public ChronoEvent(String uuid, String name) {
+    public ChronoEvent(int id, String fullName, Long initialDate, int isFullInitialDate, Long finalDate, int isFullFinalDate, String[] tags) {
+        this(Integer.valueOf(UUID.randomUUID().toString()), fullName);
+        this.isFullInitialDate = isFullInitialDate;
+        this.isFullFinalDate = isFullFinalDate;
+        this.initialDate = new Date(initialDate);
+        this.finalDate = new Date(finalDate);
+        this.id = id;
+    }
+
+    public ChronoEvent(int id, String name) {
         requireNonNull(name);
-        requireNonNull(uuid);
-        this.uuid = uuid;
+        requireNonNull(id);
+        this.id = id;
         this.name = name;
     }
 
@@ -60,19 +86,21 @@ public class ChronoEvent implements Comparable, Serializable {
         if (o == null) throw new NullPointerException("the field must not be null");
     }
 
-    public void setInitialDate(int year, int month, int day) {  }
+    public void setInitialDate(int year, int month, int day) {
+    }
 
-    public Long getInitialDate() {
+    public Date getInitialDate() {
         return initialDate;
     }
 
-    public Long getFinalDate() {
+    public Date getFinalDate() {
         return finalDate;
     }
 
-    public void setFinalDate(int year, int month, int day) {   }
+    public void setFinalDate(int year, int month, int day) {
+    }
 
-        public String getName() {
+    public String getName() {
         return name;
     }
 
@@ -119,9 +147,22 @@ public class ChronoEvent implements Comparable, Serializable {
         return this.initialDate.compareTo(event.initialDate);
     }
 
-    public String getUuid() {
-        return uuid;
+    public int getId() {
+        return id;
     }
+
+    public static ChronoEvent restoreEventFromDB(SQLiteCursor cursor) {
+        return new ChronoEvent(
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getLong(3),
+                cursor.getInt(4),
+                cursor.getLong(5),
+                cursor.getInt(6),
+                new String[]{""}
+        );
+    }
+
 }
 
 
